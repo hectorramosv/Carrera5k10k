@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción Torneo Ecuavoley 2026-2027</title>
+    <style>
+        :root {
+            --dark-blue: #0b1e36;
+            --accent-yellow: #f5b915;
+            --white: #ffffff;
+            --gray-light: #f4f6f9;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        /* --- BODY GLOBAL SIN IMAGEN DE FONDO --- */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--dark-blue); /* Color sólido de respaldo */
+        }
+
+        /* --- HEADER TOTALMENTE EXPANDIDO --- */
+        .hero-banner-image {
+            width: 100%;
+            position: relative;
+        }
+
+        .hero-banner-image img {
+            width: 100%;
+            height: auto;
+            display: block; /* Elimina cualquier espacio fantasma inferior de la imagen */
+            border-bottom: 5px solid var(--accent-yellow);
+        }
+
+        /* --- CONTENEDOR DEL BODY HACIA ABAJO --- */
+        /* La imagen de fondo se aplica aquí para que empiece exactamente bajo el header */
+        .main-content {
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding-bottom: 20px;
+        }
+
+        /* --- CONTENEDOR DE INFORMACIÓN --- */
+        .promo-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+            text-align: left;
+            align-items: stretch;
+        }
+
+        .upse-invite {
+            background: #0d2a4a;
+            border: 2px solid #1e3a5f;
+            border-top: 4px solid #38bdf8;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .upse-invite strong { color: var(--accent-yellow); }
+
+        .info-block-dark {
+            background: #0d2a4a;
+            border: 2px solid #1e3a5f;
+            border-top: 4px solid var(--accent-yellow);
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+        .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .info-row .label { color: var(--accent-yellow); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-row .val { color: var(--white); font-size: 1.05rem; font-weight: 700; margin-top: 2px; }
+
+        .price-block-dark {
+            background: #0d2a4a;
+            border: 2px solid #1e3a5f;
+            border-top: 4px solid var(--accent-yellow);
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .price-title { color: #94a3b8; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .price-amount { color: var(--accent-yellow); font-size: 2.5rem; font-weight: 900; margin: 5px 0; }
+        .price-amount span { font-size: 0.9rem; color: var(--white); font-weight: 700; display: block; text-transform: uppercase; margin-top: -5px; }
+        .slots-alert { font-size: 0.85rem; font-weight: 800; color: #fcfcfc; background: rgba(239, 68, 68, 0.1); padding: 6px 12px; border-radius: 20px; margin-top: 10px; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        /* --- FORMULARIO BLANCO --- */
+        .form-wrapper { 
+            width: 100%; 
+            max-width: 850px; 
+            padding: 0 20px; 
+            margin-top: 30px; 
+            margin-bottom: 40px; 
+        }
+        .main-form { background-color: var(--white); padding: 40px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        .form-header { text-align: center; margin-bottom: 30px; }
+        .form-header h2 { color: var(--dark-blue); font-size: 1.6rem; font-weight: 800; }
+        .form-header p { color: #64748b; font-size: 0.95rem; margin-top: 4px; font-weight: 600; }
+
+        hr { border: 0; height: 1px; background: #e2e8f0; margin: 25px 0; }
+
+        .section-title {
+            font-size: 1.1rem; color: var(--dark-blue); margin-bottom: 15px; text-transform: uppercase;
+            font-weight: 800; display: flex; justify-content: space-between; align-items: center;
+            border-left: 4px solid var(--accent-yellow); padding-left: 10px;
+        }
+
+        .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px; width: 100%; }
+        .input-group label { font-size: 0.85rem; font-weight: 700; color: #334155; }
+        .input-group input { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; outline: none; }
+        .input-group input:focus { border-color: #2563eb; }
+
+        .member-row { display: flex; align-items: stretch; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .member-number { background-color: var(--dark-blue); color: var(--white); width: 45px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .member-inputs { background-color: var(--gray-light); display: grid; grid-template-columns: 2.5fr 1fr 1.5fr; gap: 12px; padding: 12px; flex-grow: 1; }
+        .member-inputs input, .member-inputs select { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--white); font-size: 0.9rem; outline: none; }
+
+        .btn-csv { background-color: #e2e8f0; color: #334155; border: none; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 6px; cursor: pointer; }
+
+        .btn-submit {
+            background-color: #16a34a; color: var(--white); border: none; width: 100%; padding: 16px;
+            font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 15px;
+            text-transform: uppercase; box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2);
+            transition: background 0.2s;
+        }
+        .btn-submit:hover { background-color: #15803d; }
+        .btn-submit:disabled { background-color: #94a3b8 !important; cursor: not-allowed; }
+
+        /* --- PIE DE PÁGINA --- */
+        .footer-banner { 
+            background-color: var(--accent-yellow); 
+            color: var(--dark-blue); 
+            font-weight: 900; 
+            font-size: 1.5rem; 
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 50px; 
+            text-align: center; 
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 8px 0px #b28504, 0 10px 20px rgba(0,0,0,0.4);
+            border: 3px solid var(--dark-blue);
+            display: inline-block;
+            max-width: 90%;
+        }
+        .footer-banner p { text-shadow: 1px 1px 0px var(--white), -1px -1px 0px var(--white), 2px 2px 0px rgba(0,0,0,0.8); }
+
+        /* Ajustes responsivos */
+        @media (max-width: 950px) {
+            .promo-container { grid-template-columns: 1fr; gap: 15px; max-width: 600px; }
+        }
+
+        @media (max-width: 650px) {
+            .member-inputs { grid-template-columns: 1fr; gap: 8px; }
+            .footer-banner { font-size: 1.1rem; padding: 12px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-banner-image">
+        <img src="header.png" alt="Gran Torneo Relámpago de Ecuavoley">
+    </header>
+
+    <main class="main-content">
+
+        <section class="promo-container">
+            <div class="upse-invite">
+                <p>La carrera de <strong>Pedagogía de la Actividad Física y Deporte de la UPSE</strong> invita a toda la comunidad a vivir una jornada llena de emoción, adrenalina y sana competencia en el mejor ambiente deportivo.</p>
+            </div>
+
+            <div class="info-block-dark">
+                <div class="info-row">
+                    <span class="label">📍 Lugar:</span>
+                    <span class="val">Cancha "El Mirador"</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">📅 Fecha:</span>
+                    <span class="val">Por definir</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">🕒 Hora:</span>
+                    <span class="val">Por definir</span>
+                </div>
+            </div>
+
+            <div class="price-block-dark">
+                <span class="price-title">Inscripción:</span>
+                <div class="price-amount">$30 <span>Por Equipo</span></div>
+                <div class="slots-alert" id="cuposContador">
+                    ¡SOLO 4 EQUIPOS DISPONIBLES!
+                </div>
+            </div>
+        </section>
+
+        <div class="form-wrapper">
+            <form class="main-form" id="ecuavoleyForm">
+                <div class="form-header">
+                    <h2>FORMULARIO DE INSCRIPCIÓN DE EQUIPO</h2>
+                    <p>(Ecuavoley 4x4 - Relámpago 2026-2027)</p>
+                </div>
+
+                <div class="section-title">Datos del Equipo</div>
+                <div class="input-group">
+                    <label for="teamName">Nombre del Equipo</label>
+                    <input type="text" id="teamName" required placeholder="Ej: Los Reales del Volley">
+                </div>
+
+                <hr>
+
+                <div class="section-title">
+                    <span>Integrantes del Equipo (4 Personas)</span>
+                    <button type="button" class="btn-csv">Cargar Lista (Excel/CSV)</button>
+                </div>
+
+                <div id="membersContainer"></div>
+
+                <hr>
+
+                <div class="section-title">Datos de Contacto</div>
+                <div class="input-group">
+                    <label for="contactEmail">Correo Electrónico</label>
+                    <input type="email" id="contactEmail" required placeholder="correo@ejemplo.com">
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnEnviar" disabled>Cargando Torneo...</button>
+            </form>
+        </div>
+
+        <footer class="footer-banner">
+            <p>¡VEN A DEJAR TU HUELLA EN LA CANCHA!</p>
+        </footer>
+
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
