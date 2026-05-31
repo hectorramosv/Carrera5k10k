@@ -3,49 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Torneo Ecuavoley 2026-2027</title>
+    <title>Registro - Taller de Primeros Auxilios</title>
     <style>
         :root {
-            --dark-blue: #0b1e36;
-            --accent-yellow: #f5b915;
+            --medical-bg: #f1f5f9; /* Fondo gris clínico claro y limpio */
+            --emergency-red: #dc2626; /* Rojo rescate brillante */
+            --dark-text: #1e293b; /* Texto oscuro para legibilidad */
             --white: #ffffff;
-            --gray-light: #f4f6f9;
-            --border-color: #cbd5e1;
+            --gray-light: #f8fafc;
+            --border-color: #e2e8f0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
 
-        /* --- BODY GLOBAL SIN IMAGEN DE FONDO --- */
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: var(--dark-blue); /* Color sólido de respaldo */
+            background-color: var(--medical-bg);
         }
 
-        /* --- HEADER TOTALMENTE EXPANDIDO --- */
+        /* --- HEADER CONTROLADO (Para que no ocupe demasiado espacio) --- */
         .hero-banner-image {
             width: 100%;
+            max-height: 250px; /* Limita la altura máxima para que no devore la pantalla */
+            overflow: hidden;
             position: relative;
         }
 
         .hero-banner-image img {
             width: 100%;
-            height: auto;
-            display: block; /* Elimina cualquier espacio fantasma inferior de la imagen */
-            border-bottom: 5px solid var(--accent-yellow);
+            height: 380px;
+            object-fit: cover; /* Recorta la imagen proporcionalmente sin deformarla */
+            display: block;
+            border-bottom: 6px solid var(--emergency-red);
         }
 
-        /* --- CONTENEDOR DEL BODY HACIA ABAJO --- */
-        /* La imagen de fondo se aplica aquí para que empiece exactamente bajo el header */
+        /* --- CONTENEDOR PRINCIPAL CON EL FONDO --- */
         .main-content {
             width: 100%;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('fondo.png');
+            /* Se bajó la opacidad del degradado para que resalte más el fondo blanco general */
+            background-image: linear-gradient(rgba(241, 245, 249, 0.9), rgba(241, 245, 249, 0.95)), url('body.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -53,13 +61,13 @@
             padding-bottom: 20px;
         }
 
-        /* --- CONTENEDOR DE INFORMACIÓN --- */
+        /* --- CONTENEDOR DE INFORMACIÓN PRINCIPAL (Temática Blanca/Roja) --- */
         .promo-container {
             display: grid;
-            grid-template-columns: 1.2fr 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr;
             gap: 20px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 850px;
             margin: 40px auto 0 auto;
             padding: 0 20px;
             text-align: left;
@@ -67,61 +75,64 @@
         }
 
         .upse-invite {
-            background: #0d2a4a;
-            border: 2px solid #1e3a5f;
-            border-top: 4px solid #38bdf8;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--emergency-red); /* Detalle elegante en rojo */
             padding: 25px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             font-size: 1rem;
             line-height: 1.6;
-            color: #e2e8f0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            color: var(--dark-text);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
         }
-        .upse-invite strong { color: var(--accent-yellow); }
+        
+        .upse-invite strong { 
+            color: var(--emergency-red); 
+        }
 
         .info-block-dark {
-            background: #0d2a4a;
-            border: 2px solid #1e3a5f;
-            border-top: 4px solid var(--accent-yellow);
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--emergency-red);
             padding: 25px;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
         }
+
         .info-row {
             display: flex;
             flex-direction: column;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
         }
-        .info-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .info-row .label { color: var(--accent-yellow); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .info-row .val { color: var(--white); font-size: 1.05rem; font-weight: 700; margin-top: 2px; }
 
-        .price-block-dark {
-            background: #0d2a4a;
-            border: 2px solid #1e3a5f;
-            border-top: 4px solid var(--accent-yellow);
-            padding: 25px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        .info-row:last-child { 
+            border-bottom: none; 
+            padding-bottom: 0; 
         }
-        .price-title { color: #94a3b8; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .price-amount { color: var(--accent-yellow); font-size: 2.5rem; font-weight: 900; margin: 5px 0; }
-        .price-amount span { font-size: 0.9rem; color: var(--white); font-weight: 700; display: block; text-transform: uppercase; margin-top: -5px; }
-        .slots-alert { font-size: 0.85rem; font-weight: 800; color: #fcfcfc; background: rgba(239, 68, 68, 0.1); padding: 6px 12px; border-radius: 20px; margin-top: 10px; border: 1px solid rgba(239, 68, 68, 0.2); }
 
-        /* --- FORMULARIO BLANCO --- */
+        .info-row .label { 
+            color: var(--emergency-red); 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+
+        .info-row .val { 
+            color: var(--dark-text); 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            margin-top: 2px; 
+        }
+
+        /* --- FORMULARIO DE ASISTENCIA --- */
         .form-wrapper { 
             width: 100%; 
             max-width: 850px; 
@@ -129,66 +140,128 @@
             margin-top: 30px; 
             margin-bottom: 40px; 
         }
-        .main-form { background-color: var(--white); padding: 40px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
-        .form-header { text-align: center; margin-bottom: 30px; }
-        .form-header h2 { color: var(--dark-blue); font-size: 1.6rem; font-weight: 800; }
-        .form-header p { color: #64748b; font-size: 0.95rem; margin-top: 4px; font-weight: 600; }
 
-        hr { border: 0; height: 1px; background: #e2e8f0; margin: 25px 0; }
-
-        .section-title {
-            font-size: 1.1rem; color: var(--dark-blue); margin-bottom: 15px; text-transform: uppercase;
-            font-weight: 800; display: flex; justify-content: space-between; align-items: center;
-            border-left: 4px solid var(--accent-yellow); padding-left: 10px;
+        .main-form { 
+            background-color: var(--white); 
+            padding: 40px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px; width: 100%; }
-        .input-group label { font-size: 0.85rem; font-weight: 700; color: #334155; }
-        .input-group input { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; outline: none; }
-        .input-group input:focus { border-color: #2563eb; }
+        .form-header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
 
-        .member-row { display: flex; align-items: stretch; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .member-number { background-color: var(--dark-blue); color: var(--white); width: 45px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-        .member-inputs { background-color: var(--gray-light); display: grid; grid-template-columns: 2.5fr 1fr 1.5fr; gap: 12px; padding: 12px; flex-grow: 1; }
-        .member-inputs input, .member-inputs select { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; background-color: var(--white); font-size: 0.9rem; outline: none; }
+        .form-header h2 { 
+            color: var(--emergency-red); /* Título principal en Rojo */
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            letter-spacing: 0.5px;
+        }
 
-        .btn-csv { background-color: #e2e8f0; color: #334155; border: none; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 6px; cursor: pointer; }
+        .form-header p { 
+            color: #64748b; 
+            font-size: 0.95rem; 
+            margin-top: 4px; 
+            font-weight: 600; 
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .input-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+            margin-bottom: 5px; 
+            width: 100%; 
+        }
+
+        .input-group label { 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: #475569; 
+        }
+
+        .input-group input, .input-group select { 
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            font-size: 0.95rem; 
+            outline: none; 
+            background-color: var(--gray-light);
+            color: var(--dark-text);
+            transition: all 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus { 
+            border-color: var(--emergency-red); 
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+        }
 
         .btn-submit {
-            background-color: #16a34a; color: var(--white); border: none; width: 100%; padding: 16px;
-            font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 15px;
-            text-transform: uppercase; box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2);
-            transition: background 0.2s;
+            background-color: var(--emergency-red); 
+            color: var(--white); 
+            border: none; 
+            width: 100%; 
+            padding: 16px;
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin-top: 25px;
+            text-transform: uppercase; 
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+            transition: background 0.2s, transform 0.1s;
         }
-        .btn-submit:hover { background-color: #15803d; }
-        .btn-submit:disabled { background-color: #94a3b8 !important; cursor: not-allowed; }
 
-        /* --- PIE DE PÁGINA --- */
+        .btn-submit:hover { 
+            background-color: #b91c1c; 
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .btn-submit:disabled { 
+            background-color: #cbd5e1 !important; 
+            cursor: not-allowed; 
+        }
+
+        /* --- PIE DE PÁGINA (ESLOGAN) --- */
         .footer-banner { 
-            background-color: var(--accent-yellow); 
-            color: var(--dark-blue); 
+            background-color: var(--emergency-red); 
+            color: var(--white); 
             font-weight: 900; 
-            font-size: 1.5rem; 
+            font-size: 1.4rem; 
             font-style: italic;
             letter-spacing: 1px;
             margin-bottom: 50px; 
             text-align: center; 
             padding: 15px 40px;
             border-radius: 50px;
-            box-shadow: 0 8px 0px #b28504, 0 10px 20px rgba(0,0,0,0.4);
-            border: 3px solid var(--dark-blue);
+            box-shadow: 0 8px 0px #991b1b, 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--white);
             display: inline-block;
             max-width: 90%;
         }
-        .footer-banner p { text-shadow: 1px 1px 0px var(--white), -1px -1px 0px var(--white), 2px 2px 0px rgba(0,0,0,0.8); }
 
         /* Ajustes responsivos */
-        @media (max-width: 950px) {
-            .promo-container { grid-template-columns: 1fr; gap: 15px; max-width: 600px; }
-        }
-
-        @media (max-width: 650px) {
-            .member-inputs { grid-template-columns: 1fr; gap: 8px; }
+        @media (max-width: 750px) {
+            .hero-banner-image, .hero-banner-image img { height: 220px; }
+            .promo-container { grid-template-columns: 1fr; gap: 15px; }
+            .form-grid { grid-template-columns: 1fr; gap: 15px; }
+            .full-width { grid-column: span 1; }
             .footer-banner { font-size: 1.1rem; padding: 12px 25px; }
         }
     </style>
@@ -196,76 +269,96 @@
 <body>
 
     <header class="hero-banner-image">
-        <img src="header.png" alt="Gran Torneo Relámpago de Ecuavoley">
+        <img src="header.png" alt="Taller de Primeros Auxilios">
     </header>
 
     <main class="main-content">
 
         <section class="promo-container">
             <div class="upse-invite">
-                <p>La carrera de <strong>Pedagogía de la Actividad Física y Deporte de la UPSE</strong> invita a toda la comunidad a vivir una jornada llena de emoción, adrenalina y sana competencia en el mejor ambiente deportivo.</p>
+                <p>Capacitación oficial en <strong>Primeros Auxilios aplicados a la Actividad Física y el Deporte</strong>. Aprende a actuar frente a emergencias y lesiones comunes en el ámbito deportivo.</p>
             </div>
 
             <div class="info-block-dark">
                 <div class="info-row">
                     <span class="label">📍 Lugar:</span>
-                    <span class="val">Cancha "El Mirador"</span>
+                    <span class="val">UPSE</span>
                 </div>
                 <div class="info-row">
-                    <span class="label">📅 Fecha:</span>
-                    <span class="val">Por definir</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">🕒 Hora:</span>
-                    <span class="val">Por definir</span>
-                </div>
-            </div>
-
-            <div class="price-block-dark">
-                <span class="price-title">Inscripción:</span>
-                <div class="price-amount">$30 <span>Por Equipo</span></div>
-                <div class="slots-alert" id="cuposContador">
-                    ¡SOLO 4 EQUIPOS DISPONIBLES!
+                    <span class="label">📅 Fecha y Hora:</span>
+                    <span class="val">11 de Junio de 2026</span>
+                    <span class="val">8:00 am A 10:00 am</span>
                 </div>
             </div>
         </section>
 
         <div class="form-wrapper">
-            <form class="main-form" id="ecuavoleyForm">
+            <form class="main-form" id="asistenciaForm">
                 <div class="form-header">
-                    <h2>FORMULARIO DE INSCRIPCIÓN DE EQUIPO</h2>
-                    <p>(Ecuavoley 4x4 - Relámpago 2026-2027)</p>
+                    <h2>REGISTRO DE ASISTENCIA</h2>
+                    <p>Por favor, llena tus datos personales de manera correcta</p>
                 </div>
 
-                <div class="section-title">Datos del Equipo</div>
-                <div class="input-group">
-                    <label for="teamName">Nombre del Equipo</label>
-                    <input type="text" id="teamName" required placeholder="Ej: Los Reales del Volley">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="cedula">Número de Cédula</label>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Ej: 2400xxxxxx" maxlength="10">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nombre">Nombres Completos</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="sexo">Sexo</label>
+                        <select id="sexo" name="sexo" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="edad">Edad</label>
+                        <select id="edad" name="edad" required>
+                            <option value="" disabled selected>Seleccione su edad...</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="telefono">Número de Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 09xxxxxxxx" maxlength="10">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="carrera">Carrera</label>
+                        <input type="text" id="carrera" name="carrera" required placeholder="Ej: Pedagogía de la Actividad Física">
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="semestre">Semestre</label>
+                        <select id="semestre" name="semestre" required>
+                            <option value="" disabled selected>Seleccione el semestre...</option>
+                            <option value="1er Semestre">1er Semestre</option>
+                            <option value="2do Semestre">2do Semestre</option>
+                            <option value="3er Semestre">3er Semestre</option>
+                            <option value="4to Semestre">4to Semestre</option>
+                            <option value="5to Semestre">5to Semestre</option>
+                            <option value="6to Semestre">6to Semestre</option>
+                            <option value="7mo Semestre">7mo Semestre</option>
+                            <option value="8vo Semestre">8vo Semestre</option>
+                        </select>
+                    </div>
                 </div>
 
-                <hr>
-
-                <div class="section-title">
-                    <span>Integrantes del Equipo (4 Personas)</span>
-                    <button type="button" class="btn-csv">Cargar Lista (Excel/CSV)</button>
-                </div>
-
-                <div id="membersContainer"></div>
-
-                <hr>
-
-                <div class="section-title">Datos de Contacto</div>
-                <div class="input-group">
-                    <label for="contactEmail">Correo Electrónico</label>
-                    <input type="email" id="contactEmail" required placeholder="correo@ejemplo.com">
-                </div>
-
-                <button type="submit" class="btn-submit" id="btnEnviar" disabled>Cargando Torneo...</button>
+                <button type="submit" class="btn-submit" id="btnEnviar">Registrar Asistencia</button>
             </form>
         </div>
 
         <footer class="footer-banner">
-            <p>¡VEN A DEJAR TU HUELLA EN LA CANCHA!</p>
+            <p>Minuto Cero: Tu Decisión salvavidas</p>
         </footer>
 
     </main>

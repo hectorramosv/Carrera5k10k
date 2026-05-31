@@ -1,111 +1,53 @@
-// 1. TU URL DE GOOGLE APPS SCRIPT ACTUALIZADA
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwLl0Ap4eHGQL1qf7Ve7lGgWBjh7eRb3knngkcYkn3qzRTQhjLiTg_CyyKKTWtxvmWE/exec";
+document.addEventListener("DOMContentLoaded", () => {
+    const selectEdad = document.getElementById("edad");
+    const formulario = document.getElementById("asistenciaForm");
+    const btnEnviar = document.getElementById("btnEnviar");
 
-const container = document.getElementById('membersContainer');
-const botonEnviar = document.getElementById('btnEnviar');
-const cuposContador = document.getElementById('cuposContador');
-
-// 2. Generar el formulario para exactamente 4 personas
-for (let i = 1; i <= 4; i++) {
-    container.innerHTML += `
-        <div class="member-row">
-            <div class="member-number">${i}</div>
-            <div class="member-inputs">
-                <input type="text" placeholder="Nombre Completo del Integrante" required id="p_name_${i}">
-                <select id="p_age_${i}" required>
-                    <option value="" disabled selected>Edad</option>
-                    ${generateAgeOptions()}
-                </select>
-                <input type="text" placeholder="Cédula de Identidad (DNI)" required id="p_dni_${i}">
-            </div>
-        </div>
-    `;
-}
-
-function generateAgeOptions() {
-    let options = '';
-    for (let age = 15; age <= 65; age++) {
-        options += `<option value="${age}">${age}</option>`;
+    // ==========================================
+    // 1. GENERACIÓN DINÁMICA DE EDADES (15 a 75)
+    // ==========================================
+    for (let edad = 15; edad <= 75; edad++) {
+        const opcion = document.createElement("option");
+        opcion.value = edad;
+        opcion.textContent = `${edad} años`;
+        selectEdad.appendChild(opcion);
     }
-    return options;
-}
 
-// 3. VALIDACIÓN EN TIEMPO REAL: Verificar cupos al cargar la página web
-function verificarCuposDisponibles() {
-    fetch(URL_APPS_SCRIPT)
-        .then(response => response.json())
-        .then(data => {
-            const registrados = data.total;
-            const cuposMaximos = 4;
-            const disponibles = cuposMaximos - registrados;
+    // ==========================================
+    // 2. ENVÍO DE DATOS A GOOGLE SHEETS
+    // ==========================================
+    formulario.addEventListener("submit", function(e) {
+        e.preventDefault(); // Evita que la página se recargue por completo
 
-            if (disponibles <= 0) {
-                cuposContador.innerHTML = "❌ ¡SOLO 4 EQUIPOS DISPONIBLES! (0 CUPOS DISPONIBLES)";
-                cuposContador.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
-                cuposContador.style.borderColor = "#ef4444";
-                botonEnviar.innerText = "INSCRIPCIONES CERRADAS (CUPOS LLENOS)";
-                botonEnviar.disabled = true;
-            } else {
-                cuposContador.innerHTML = `🔥 ¡SOLO 4 EQUIPOS DISPONIBLES! (${disponibles} CUPOS DISPONIBLES)`;
-                botonEnviar.innerText = "Enviar Inscripción";
-                botonEnviar.disabled = false;
-            }
+        // Cambiar el estado del botón para dar feedback al usuario
+        btnEnviar.disabled = true;
+        btnEnviar.textContent = "Registrando asistencia...";
+
+        // ⚠️ REEMPLAZA ESTA URL CON TU ENLACE DE GOOGLE APPS SCRIPT (El que termina en /exec)
+        const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzTp8QCaZx4asbrtSvU_vCwD9xuHeQdlZdqrPpn6RJ_XvS4jiaNFvnirwc3_UJJN_cS/exec";
+
+        // Capturar los datos del formulario de forma limpia
+        const datosFormulario = new URLSearchParams(new FormData(formulario));
+
+        // Enviar los datos a la hoja de cálculo mediante Fetch API
+        fetch(URL_GOOGLE_SCRIPT, {
+            method: "POST",
+            body: datosFormulario,
+            mode: "no-cors" // Evita bloqueos por políticas CORS en GitHub Pages
+        })
+        .then(() => {
+            // Acción en caso de éxito total
+            alert("¡Registro de asistencia exitoso! Gracias por tu participación.");
+            formulario.reset(); // Limpia todos los campos del formulario de inmediato
         })
         .catch(error => {
-            console.error("Error al leer los cupos:", error);
-            cuposContador.innerHTML = "⚠️ Error al verificar cupos de inscripción";
-            botonEnviar.innerText = "Enviar Inscripción";
-            botonEnviar.disabled = false;
+            console.error("Error al registrar:", error);
+            alert("Hubo un inconveniente al guardar tu asistencia. Por favor, inténtalo de nuevo.");
+        })
+        .finally(() => {
+            // Restablecer el botón a su estado original
+            btnEnviar.disabled = false;
+            btnEnviar.textContent = "Registrar Asistencia";
         });
-}
-
-// Ejecutar la verificación inmediatamente al abrir el archivo
-verificarCuposDisponibles();
-
-// 4. ENVÍO DE DATOS CON EXACTAMENTE 4 INTEGRANTES RECOLECTADOS
-document.getElementById('ecuavoleyForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    botonEnviar.innerText = "PROCESANDO INSCRIPCIÓN...";
-    botonEnviar.disabled = true;
-
-    // Paquete ordenado con los datos de las 4 personas requisadas
-    const payload = {
-        nombre_equipo: document.getElementById('teamName').value,
-        correo_contacto: document.getElementById('contactEmail').value,
-        
-        j1_nombre: document.getElementById('p_name_1').value,
-        j1_edad: document.getElementById('p_age_1').value,
-        j1_cedula: document.getElementById('p_dni_1').value,
-        
-        j2_nombre: document.getElementById('p_name_2').value,
-        j2_edad: document.getElementById('p_age_2').value,
-        j2_cedula: document.getElementById('p_dni_2').value,
-        
-        j3_nombre: document.getElementById('p_name_3').value,
-        j3_edad: document.getElementById('p_age_3').value,
-        j3_cedula: document.getElementById('p_dni_3').value,
-        
-        j4_nombre: document.getElementById('p_name_4').value,
-        j4_edad: document.getElementById('p_age_4').value,
-        j4_cedula: document.getElementById('p_dni_4').value
-    };
-
-    fetch(URL_APPS_SCRIPT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        alert('¡Inscripción exitosa! Tu equipo ha sido registrado.');
-        document.getElementById('ecuavoleyForm').reset();
-        verificarCuposDisponibles();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al guardar tu inscripción.');
-        botonEnviar.disabled = false;
-        botonEnviar.innerText = "Enviar Inscripción";
     });
 });
